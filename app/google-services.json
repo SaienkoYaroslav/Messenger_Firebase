@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1073522105292",
+    "project_id": "messenger-cd2fa",
+    "storage_bucket": "messenger-cd2fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073522105292:android:42f4b34927ea1003bc1b69",
+        "android_client_info": {
+          "package_name": "ua.com.masterok.messengerfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073522105292-eabrb7jcs9cth4ec7skc8ecj5crphro7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0BVndaH2tUa_lp6RZYQNI9jEKQQS9LdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073522105292-eabrb7jcs9cth4ec7skc8ecj5crphro7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
