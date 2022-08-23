@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView tvRegister, tvForgotPassword;
+    private EditText etEmail, etPassword;
+    private Button bLogin;
 
     private FirebaseAuth firebaseAuth;
     private static final String TAG = "MainActivity";
@@ -30,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-
+        tvRegister = findViewById(R.id.text_view_main_go_to_registration);
+        tvForgotPassword = findViewById(R.id.text_view_main_go_to_forgot_password);
+        etEmail = findViewById(R.id.edit_text_main_email);
+        etPassword = findViewById(R.id.edit_text_main_password);
+        bLogin = findViewById(R.id.button_main_login);
     }
 
     private void firebase() {
