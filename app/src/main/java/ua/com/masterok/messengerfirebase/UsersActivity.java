@@ -10,18 +10,47 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class UsersActivity extends AppCompatActivity {
 
     private UsersViewModel usersViewModel;
 
+    private RecyclerView rvUsers;
+    private UsersAdapter usersAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
+        init();
         viewModel();
+        adapter();
+
+        // перевірка
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            boolean random = new Random().nextBoolean();
+            users.add(new User("id " + i, "Petro " + i, "Sraka " + i, 18 + i, random));
+        }
+        usersAdapter.setUsers(users);
+        //
+
+    }
+
+    private void init() {
+        rvUsers = findViewById(R.id.recycler_view_users);
+    }
+
+    private void adapter() {
+        usersAdapter = new UsersAdapter();
+        rvUsers.setAdapter(usersAdapter);
     }
 
     private void viewModel() {

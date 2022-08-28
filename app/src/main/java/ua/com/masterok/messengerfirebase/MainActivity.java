@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Button bLogin;
 
     private MainViewModel mainViewModel;
-
-    private String password = "123456";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
