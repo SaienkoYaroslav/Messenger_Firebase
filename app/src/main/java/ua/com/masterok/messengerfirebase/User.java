@@ -16,6 +16,10 @@ public class User {
         this.isOnline = isOnline;
     }
 
+    // При роботі з РілТаймБД Файрбейс клас, ексземпляр якого ми хочемо записати до БД, повинен мати пустий конструктор
+    public User() {
+    }
+
     public String getId() {
         return id;
     }

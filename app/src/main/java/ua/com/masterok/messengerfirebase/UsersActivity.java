@@ -3,6 +3,7 @@ package ua.com.masterok.messengerfirebase;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,10 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class UsersActivity extends AppCompatActivity {
 
@@ -29,18 +34,25 @@ public class UsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
+
+
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    String value = dataSnapshot.getValue(String.class);
+//                    Log.d("TAG", value);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         init();
         viewModel();
         adapter();
-
-        // перевірка
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            boolean random = new Random().nextBoolean();
-            users.add(new User("id " + i, "Petro " + i, "Sraka " + i, 18 + i, random));
-        }
-        usersAdapter.setUsers(users);
-        //
 
     }
 
@@ -51,6 +63,7 @@ public class UsersActivity extends AppCompatActivity {
     private void adapter() {
         usersAdapter = new UsersAdapter();
         rvUsers.setAdapter(usersAdapter);
+
     }
 
     private void viewModel() {
@@ -63,6 +76,12 @@ public class UsersActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+        usersViewModel.getUsersList().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                usersAdapter.setUsers(users);
             }
         });
     }
