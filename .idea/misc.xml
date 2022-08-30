@@ -5,10 +5,15 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/drawable/circle_green.xml" value="0.132" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/drawable/circle_red.xml" value="0.132" />
+        <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/drawable/my_message_bg.xml" value="0.141" />
+        <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/drawable/other_message_bg.xml" value="0.141" />
+        <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/activity_reset_password.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/activity_users.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/my_message_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/other_message_item.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/layout/user_item.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/udemy/MessengerFirebase/app/src/main/res/menu/menu_logout.xml" value="0.25416666666666665" />
       </map>
