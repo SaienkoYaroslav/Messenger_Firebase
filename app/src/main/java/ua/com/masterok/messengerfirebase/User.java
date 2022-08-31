@@ -6,14 +6,14 @@ public class User {
     private String name;
     private String lastName;
     private int age;
-    private boolean isOnline;
+    private boolean online;
 
     public User(String id, String name, String lastName, int age, boolean isOnline) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
-        this.isOnline = isOnline;
+        this.online = isOnline;
     }
 
     // При роботі з РілТаймБД Файрбейс клас, ексземпляр якого ми хочемо записати до БД, повинен мати пустий конструктор
@@ -37,6 +37,6 @@ public class User {
     }
 
     public boolean isOnline() {
-        return isOnline;
+        return online;
     }
 }

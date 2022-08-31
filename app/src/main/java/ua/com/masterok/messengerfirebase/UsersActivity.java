@@ -103,4 +103,17 @@ public class UsersActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CURRENT_USER_ID, currentUserId);
         return intent;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        usersViewModel.setUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        usersViewModel.setUserOnline(false);
+    }
+
 }

@@ -2,6 +2,7 @@ package ua.com.masterok.messengerfirebase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,6 +89,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onChanged(User user) {
                 String userInfo = String.format("%s %s", user.getName(), user.getLastName());
                 tvTitle.setText(userInfo);
+                int bgResId;
+                if (user.isOnline()) {
+                    bgResId = R.drawable.circle_green;
+                } else {
+                    bgResId = R.drawable.circle_red;
+                }
+                Drawable background = ContextCompat.getDrawable(getApplicationContext(), bgResId);
+                onlineStatus.setBackground(background);
             }
         });
     }
@@ -120,6 +130,18 @@ public class ChatActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CURRENT_USER_ID, currentUserId);
         intent.putExtra(EXTRA_OTHER_USER_ID, otherUserId);
         return intent;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        chatViewModel.setUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        chatViewModel.setUserOnline(false);
     }
 
 }
