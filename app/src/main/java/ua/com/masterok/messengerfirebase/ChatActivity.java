@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView ivSendMessage;
 
     private MessagesAdapter messagesAdapter;
+    private ChatViewModel chatViewModel;
+    private ChatViewModelFactory viewModelFactory;
 
     private String currentUserId;
     private String otherUserId;
@@ -36,29 +40,9 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         initViews();
         intent();
+        viewModel();
         adapter();
-
-        // тест
-        List<Message> messages = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Message message = new Message(
-                    "Text " + i,
-                    currentUserId,
-                    otherUserId
-            );
-            messages.add(message);
-        }
-        for (int i = 0; i < 10; i++) {
-            Message message = new Message(
-                    "Text " + i + 10,
-                    otherUserId,
-                    currentUserId
-            );
-            messages.add(message);
-        }
-        messagesAdapter.setMessages(messages);
-        //
-
+        onClickSendMessage();
     }
 
     private void initViews() {
@@ -69,9 +53,61 @@ public class ChatActivity extends AppCompatActivity {
         ivSendMessage = findViewById(R.id.image_view_send_message);
     }
 
+    private void viewModel() {
+        viewModelFactory = new ChatViewModelFactory(currentUserId, otherUserId);
+        // в конструктор ViewModelProvider другим параметром передається viewModelFactory, так як
+        // наша ChatViewModel має конструктор з параметрами, а парметри ініціалізуються в ChatViewModelFactory,
+        // тому екземпляр цього класу потрібно передати в конструктор ViewModelProvider
+        chatViewModel = new ViewModelProvider(this, viewModelFactory).get(ChatViewModel.class);
+
+        chatViewModel.getMessages().observe(this, new Observer<List<Message>>() {
+            @Override
+            public void onChanged(List<Message> messages) {
+                messagesAdapter.setMessages(messages);
+            }
+        });
+        chatViewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                if (errorMessage != null) {
+                    Toast.makeText(ChatActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        chatViewModel.getMessageSent().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean sent) {
+                if (sent) {
+                    etMessage.setText("");
+                }
+            }
+        });
+        chatViewModel.getOtherUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                String userInfo = String.format("%s %s", user.getName(), user.getLastName());
+                tvTitle.setText(userInfo);
+            }
+        });
+    }
+
     private void adapter() {
         messagesAdapter = new MessagesAdapter(currentUserId);
         rvMessages.setAdapter(messagesAdapter);
+    }
+
+    private void onClickSendMessage() {
+        ivSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Message message = new Message(
+                        etMessage.getText().toString().trim(),
+                        currentUserId,
+                        otherUserId
+                );
+                chatViewModel.sendMessage(message);
+            }
+        });
     }
 
     private void intent() {

@@ -46,6 +46,8 @@
         android:background="@color/white"
         android:inputType="textMultiLine"
         android:hint="@string/type_your_message"
+        android:textColor="@color/black"
+        android:textColorHint="@android:color/darker_gray"
         android:paddingStart="16dp"
         android:paddingEnd="48dp"
         android:paddingTop="16dp"
